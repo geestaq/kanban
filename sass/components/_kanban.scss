@@ -1,0 +1,47 @@
+button {
+	border: 2px solid #255575;
+	background-color: #255575;
+	border-radius: 5px;
+	padding: 5px 10px;
+	color: #5fa0cc;
+	&:hover {
+		border: 2px solid #77c8ff;
+		color: #77c8ff;
+		cursor: pointer;
+	}
+}
+
+.board {
+	.column-container {
+		margin-top: 1em;
+	}
+	.column {
+		margin: 0 1em 1em 0;
+		padding: 0 .5em .5em .5em;
+		border: 2px solid #1d587f;
+		border-radius: 5px;
+		background-color: #3a85b7;
+		.column-title {
+			margin: .5em 0;
+		}
+		.column-card-list {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			.card {
+				border: 2px solid #1d587f;
+				background-color: #5fa0cc;
+				border-radius: 5px;
+				margin-bottom: .5em;
+				padding: .5em;
+				.card-description {
+					margin-top: 0;
+					margin-bottom: .5em;
+				}
+				.btn-delete {
+
+				}
+			}
+		}
+	}
+}

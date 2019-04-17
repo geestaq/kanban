@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		this.id = randomString();
 		this.name = name;
-		this.element = generateTemplate('column-template', { id: this.id, name: this.name });
+		this.element = generateTemplate('column-template', { id: this.id, name: this.name }, 'div', ['col-lg-4','col-md-6','col-sm-12']);
 
 		//zdarzenie kolumny
 		this.element.querySelector('.column').addEventListener('click', function (event) {
@@ -83,11 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	// CREATING COLUMNS
-	var todoColumn = new Column('To do');
-	var doingColumn = new Column('Doing');
-	var doneColumn = new Column('Done');
-//console.log(todoColumn);
-//console.log(doingColumn);
+	var todoColumn = new Column('Do zrobienia');
+	var doingColumn = new Column('W trakcie');
+	var doneColumn = new Column('Zrobione');
 
 	// ADDING COLUMNS TO THE BOARD
 	board.addColumn(todoColumn);
@@ -95,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	board.addColumn(doneColumn);
 
 	// CREATING CARDS
-	var card1 = new Card('New task');
-	var card2 = new Card('Create kanban boards');
+	var card1 = new Card('Nowe zadanie');
+	var card2 = new Card('Utworzenie tablicy Kanban');
 
 	// ADDING CARDS TO COLUMNS
 	todoColumn.addCard(card1);
@@ -104,9 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	//funkcja inicjalizujaca sortable.js na elemencie
 	function initSortable(id) {
-//console.log(id);
 		var el = document.getElementById(id);
-//console.log(el);
 		var sortable = Sortable.create(el, {
 			group: 'kanban',
 			sort: true
@@ -123,12 +119,20 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	//funkcja zwraca element html wygenerowany na podstawie szablonu mustache
-	function generateTemplate(name, data, basicElement) {
+	function generateTemplate(name, data, basicElement, elementClasses) {
 		const template = document.getElementById(name).innerHTML;
 		const element = document.createElement(basicElement || 'div');
 
 		Mustache.parse(template);
 		element.innerHTML = Mustache.render(template, data);
+
+		//dodanie klas do elementu
+		elementClasses = elementClasses || [];
+		if(elementClasses.length > 0) {
+			for(let i in elementClasses) {
+				element.classList.add(elementClasses[i]);
+			}
+		}
 
 		return element;
 	}
