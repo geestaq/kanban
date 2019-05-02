@@ -25,7 +25,6 @@ document.querySelector('#board .create-column').addEventListener('click', functi
 		return resp.json();
 	})
 	.then(function(resp) {
-console.log(resp);
 		const column = new Column(resp.id, name);
 		board.addColumn(column);
 	});
